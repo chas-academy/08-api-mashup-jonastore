@@ -68,10 +68,10 @@ $("body").on("click", ".singleWord", function(){
 });*/
 
 
-$("body").on("click", ".singleWord", function() {
+function flickrRelated(searchTerm) {
   console.log("testing");
   $('#results').empty();
-  let searchTerm = this.value;
+  //let searchTerm = this.value;
   var flickrUrl = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?&tags='" + searchTerm + "'";
     $.getJSON( flickrUrl, { format: "json" } )
     .done(function( data ) {
@@ -82,9 +82,32 @@ $("body").on("click", ".singleWord", function() {
         }
       });
     });
+};
+
+function wordsRelated(searchTerm) {
+  $('#related').empty();
+  var flickrUrl = "http://words.bighugelabs.com/api/2/1efdcf3985947128f17dd03002a9f10e/" + searchTerm + "/json";
+  $.getJSON( flickrUrl, { format: "json" } )
+    .done(function( data ) {
+      $.each( data, function( i, word ) {
+        $.each(word, function(y, words){
+          $("#related").append(String("<button class='singleWord' value='" + words + "'>" + words + "</button>").replace(/,/g," "));//.replace(/,/g,"<br>") + "<br>");
+          if ( words === 0 ) {
+            return false;
+         }
+        });
+      });
+    });
+};
+
+$("body").on("click", ".singleWord", function() {
+  let searchTerm = this.value;
+
+  flickrRelated(searchTerm);
+  wordsRelated(searchTerm);
 });
 
-
+//gör en likadan för förslagen
 $( "#searchButton" ).click(function() {
   flickr();
   words();
