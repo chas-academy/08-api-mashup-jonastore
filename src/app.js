@@ -35,20 +35,39 @@ $("#searchButton").on("click", function() {
 $("#searchButton").on("click", function() {
   $('#related').empty();
   let searchTerm = $("#searchBar").val();
-  var wordURL = "http://words.bighugelabs.com/api/2/1efdcf3985947128f17dd03002a9f10e/word/json";
-  $.getJSON( wordURL, {
-    format: "json"
-  })
+  var flickrUrl = "http://words.bighugelabs.com/api/2/1efdcf3985947128f17dd03002a9f10e/bear/json";
+  $.getJSON( flickrUrl, { format: "json" } )
     .done(function( data ) {
-      $.each( data.items, function( i, item ) {
-        //let searchTerm = null;
-        $( "<p>" + item.media.m + "</p>").appendTo( "#related" );
-        if ( i === 4 ) {
-          return false;
-        }
+      $.each( data, function( i, item ) {
+        $.each(item, function(y, items){
+          $("#related").append(String(items).replace(/,/g,"<br>") + "<br>");
+          if ( i > 3 ) {
+            return false;
+          }
+        });
       });
     });
 })();
+
+
+
+/*
+  var wordURL = "http://words.bighugelabs.com/api/2/1efdcf3985947128f17dd03002a9f10e/bear/json";
+
+
+$("#searchButton").click(function(){
+    $('#related').empty();
+    $.getJSON(wordURL, function(data){
+        $.each(data, function( i, word){
+            $.each(word, function(y, words){
+               $( "<button>" + words + "</button>" ).appendTo( "#results" );
+               if ( i > 3 ) {
+                  return false;
+                }
+            });
+        });   
+    });
+});*/
 
 
 
