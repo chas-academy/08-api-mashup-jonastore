@@ -13,8 +13,8 @@ let flickrParams = "&tags='" + searchTerm + "'&format=json&nojsoncallback=1";
 let wordKey = "1efdcf3985947128f17dd03002a9f10e";
 
 //image search
-/*
-$("#searchButton").on("click", function() {
+
+function flickr() {
   $('#results').empty();
   let searchTerm = $("#searchBar").val();
   var flickrUrl = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?&tags='" + searchTerm + "'";
@@ -28,47 +28,31 @@ $("#searchButton").on("click", function() {
         }
       });
     });
-})();*/
+};
 
 
 //word search
-$("#searchButton").on("click", function() {
+function words() {
   $('#related').empty();
   let searchTerm = $("#searchBar").val();
-  var flickrUrl = "http://words.bighugelabs.com/api/2/1efdcf3985947128f17dd03002a9f10e/bear/json";
+  var flickrUrl = "http://words.bighugelabs.com/api/2/1efdcf3985947128f17dd03002a9f10e/" + searchTerm + "/json";
   $.getJSON( flickrUrl, { format: "json" } )
     .done(function( data ) {
-      $.each( data, function( i, item ) {
-        $.each(item, function(y, items){
-          $("#related").append(String(items).replace(/,/g,"<br>") + "<br>");
-          if ( i > 3 ) {
+      $.each( data, function( i, word ) {
+        $.each(word, function(y, words){
+          $("#related").append(String(words).replace(/,/g,"<br>") + "<br>");
+          if ( y === 3 ) {
             return false;
           }
         });
       });
     });
-})();
+};
 
-
-
-/*
-  var wordURL = "http://words.bighugelabs.com/api/2/1efdcf3985947128f17dd03002a9f10e/bear/json";
-
-
-$("#searchButton").click(function(){
-    $('#related').empty();
-    $.getJSON(wordURL, function(data){
-        $.each(data, function( i, word){
-            $.each(word, function(y, words){
-               $( "<button>" + words + "</button>" ).appendTo( "#results" );
-               if ( i > 3 ) {
-                  return false;
-                }
-            });
-        });   
-    });
-});*/
-
+$( "#searchButton" ).click(function() {
+  flickr();
+  words();
+});
 
 
 
