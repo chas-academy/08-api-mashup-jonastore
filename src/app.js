@@ -38,9 +38,6 @@ function words() {
       $.each( data, function( i, word ) {
         $.each(word, function(y, words){
           $("#related").append(String("<button class='singleWord' value=" + words[0] + ">" + words[0] + "</button>").replace(/,/g," "));//.replace(/,/g,"<br>") + "<br>");
-          if ( words > 4 ) {
-            return false;
-         }
         });
       });
     });
@@ -72,9 +69,6 @@ function wordsRelated(searchTerm) {
         $.each(word, function(y, words){
           $("#related").append(String("<button class='singleWord' value='" + words[0] + "'>" + words[0] + "</button>").replace("," ," "));//.replace(/,/g,"<br>") + "<br>");
           $("#searchBar").val(searchTerm);
-          if ( words > 4 ) {
-            return false;
-         }
         });
       });
     });
@@ -90,6 +84,13 @@ $("body").on("click", ".singleWord", function() {
 $( "#searchButton" ).click(function() {
   flickr();
   words();
+});
+
+$( "#clearSearch" ).click(function() {
+  $("#related").empty();
+  $("#results").empty();
+  $("#searchBar").val(null);
+
 });
 
 
