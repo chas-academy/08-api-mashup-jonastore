@@ -19,7 +19,7 @@ $("#searchButton").on("click", function() {
     .done(function( data ) {
       $.each( data.items, function( i, item ) {
         //let searchTerm = null;
-        $( "<img>" ).attr( "src", item.media.m).appendTo( "#images" );
+        $( "<img>" ).attr( "src", item.media.m).appendTo( "#results" );
         if ( i === 4 ) {
           return false;
         }
