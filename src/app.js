@@ -23,7 +23,7 @@ function flickr(data) { //add words funtion here?
       $.each( data.items, function( i, item ) {
         //let searchTerm = null;
         $( "<img>" ).attr( "src", item.media.m).appendTo( "#results" );
-        if ( i > 3 ) {
+        if ( i > 4 ) {
           return false;
         }
       });
@@ -41,7 +41,7 @@ function words() {
       $.each( data, function( i, word ) {
         $.each(word, function(y, words){
           $("#related").append(String("<button class='singleWord' value=" + words[0] + ">" + words[0] + "</button>").replace(/,/g," "));//.replace(/,/g,"<br>") + "<br>");
-          if ( words === 0 ) {
+          if ( words > 4 ) {
             return false;
          }
         });
@@ -77,7 +77,7 @@ function flickrRelated(searchTerm) {
     .done(function( data ) {
       $.each( data.items, function( i, item ) {
         $( "<img>" ).attr( "src", item.media.m).appendTo( "#results" );
-        if ( i === 3 ) {
+        if ( i === 4 ) {
           return false;
         }
       });
@@ -91,8 +91,9 @@ function wordsRelated(searchTerm) {
     .done(function( data ) {
       $.each( data, function( i, word ) {
         $.each(word, function(y, words){
-          $("#related").append(String("<button class='singleWord' value='" + words[0] + "'>" + words[0] + "</button>").replace(/,/g," "));//.replace(/,/g,"<br>") + "<br>");
-          if ( words === 0 ) {
+          $("#related").append(String("<button class='singleWord' value='" + words[0] + "'>" + words[0] + "</button>").replace("," ," "));//.replace(/,/g,"<br>") + "<br>");
+          $("#searchBar").val(searchTerm);
+          if ( words > 4 ) {
             return false;
          }
         });
