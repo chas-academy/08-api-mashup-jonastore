@@ -1,6 +1,6 @@
 /* Code goes here */
 //import './styles/app.scss';
-
+import './app.scss';
 //https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=b9ffbd74f90f37df094b59bd2915ff37&tags=car&format=json&nojsoncallback=1
 
 let searchTerm = $("#searchBar").val();
@@ -12,8 +12,6 @@ let flickrParams = "&tags='" + searchTerm + "'&format=json&nojsoncallback=1";
 
 let wordKey = "1efdcf3985947128f17dd03002a9f10e";
 
-//image search
-
 function flickr() { //add words funtion here?
   $('#results').empty();
   let searchTerm = $("#searchBar").val();
@@ -24,15 +22,13 @@ function flickr() { //add words funtion here?
         //let searchTerm = null;
         //$( "<img>" ).attr( "src", item.media.m).appendTo( "#results" );
         $("#results").append(String("<a href='" + item.link + "'><img src='" + item.media.m + "'></a>"));
-        if ( i > 4 ) {
+        if ( i > 3 ) {
           return false;
         }
       });
     });
 };
 
-
-//word search
 function words() {
   $('#related').empty();
   let searchTerm = $("#searchBar").val();
@@ -50,25 +46,6 @@ function words() {
     });
 };
 
-/*
-$("body").on("click", ".singleWord", function(){
-  console.log("test");
-});*/
-/*
-$("body").on("click", ".singleWord", function(){
-  console.log("test");
-  var urls = this.val;
-    $.getJSON(urls, function(result){
-        $("#related").html("");
-        $.each(result, function(key1, value1){
-            $.each(value1, function(key, value){
-                $("#related").append(String(value).replace(/,/g,"<br>") + "<br>");
-            });
-        });   
-    });
-});*/
-
-
 function flickrRelated(searchTerm) {
   console.log("testing");
   $('#results').empty();
@@ -77,8 +54,9 @@ function flickrRelated(searchTerm) {
     $.getJSON( flickrUrl, { format: "json" } )
     .done(function( data ) {
       $.each( data.items, function( i, item ) {
+        //$( "<img>" ).attr( "src", item.media.m).appendTo( "#results" );
         $("#results").append(String("<a href='" + item.link + "'><img src='" + item.media.m + "'></a>"));
-        if ( i === 4 ) {
+        if ( i > 3 ) {
           return false;
         }
       });
