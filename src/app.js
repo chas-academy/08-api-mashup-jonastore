@@ -14,7 +14,7 @@ let wordKey = "1efdcf3985947128f17dd03002a9f10e";
 
 //image search
 
-function flickr() {
+function flickr(data) { //add words funtion here?
   $('#results').empty();
   let searchTerm = $("#searchBar").val();
   var flickrUrl = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?&tags='" + searchTerm + "'";
@@ -40,14 +40,50 @@ function words() {
     .done(function( data ) {
       $.each( data, function( i, word ) {
         $.each(word, function(y, words){
-          $("#related").append(String("<a href='" + words + "'>" + words + "</a>").replace(/,/g,"<br>") + "<br>");
-          if ( y === 3 ) {
+          $("#related").append(String("<button class='singleWord' value='" + words + "'>" + words + "</button>").replace(/,/g," "));//.replace(/,/g,"<br>") + "<br>");
+          if ( words === 0 ) {
             return false;
-          }
+         }
         });
       });
     });
 };
+
+/*
+$("body").on("click", ".singleWord", function(){
+  console.log("test");
+});*/
+/*
+$("body").on("click", ".singleWord", function(){
+  console.log("test");
+  var urls = this.val;
+    $.getJSON(urls, function(result){
+        $("#related").html("");
+        $.each(result, function(key1, value1){
+            $.each(value1, function(key, value){
+                $("#related").append(String(value).replace(/,/g,"<br>") + "<br>");
+            });
+        });   
+    });
+});*/
+
+
+$("body").on("click", ".singleWord", function() {
+  console.log("testing");
+  $('#results').empty();
+  let searchTerm = this.value;
+  var flickrUrl = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?&tags='" + searchTerm + "'";
+    $.getJSON( flickrUrl, { format: "json" } )
+    .done(function( data ) {
+      $.each( data.items, function( i, item ) {
+        $( "<img>" ).attr( "src", item.media.m).appendTo( "#results" );
+        if ( i === 3 ) {
+          return false;
+        }
+      });
+    });
+});
+
 
 $( "#searchButton" ).click(function() {
   flickr();
