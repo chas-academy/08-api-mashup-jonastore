@@ -40,7 +40,7 @@ function words() {
     .done(function( data ) {
       $.each( data, function( i, word ) {
         $.each(word, function(y, words){
-          $("#related").append(String("<button class='singleWord' value='" + words + "'>" + words + "</button>").replace(/,/g," "));//.replace(/,/g,"<br>") + "<br>");
+          $("#related").append(String("<button class='singleWord' value=" + words[0] + ">" + words[0] + "</button>").replace(/,/g," "));//.replace(/,/g,"<br>") + "<br>");
           if ( words === 0 ) {
             return false;
          }
@@ -91,7 +91,7 @@ function wordsRelated(searchTerm) {
     .done(function( data ) {
       $.each( data, function( i, word ) {
         $.each(word, function(y, words){
-          $("#related").append(String("<button class='singleWord' value='" + words + "'>" + words + "</button>").replace(/,/g," "));//.replace(/,/g,"<br>") + "<br>");
+          $("#related").append(String("<button class='singleWord' value='" + words[0] + "'>" + words[0] + "</button>").replace(/,/g," "));//.replace(/,/g,"<br>") + "<br>");
           if ( words === 0 ) {
             return false;
          }
@@ -107,7 +107,6 @@ $("body").on("click", ".singleWord", function() {
   wordsRelated(searchTerm);
 });
 
-//gör en likadan för förslagen
 $( "#searchButton" ).click(function() {
   flickr();
   words();
