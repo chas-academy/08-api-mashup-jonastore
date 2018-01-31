@@ -10,9 +10,12 @@ let flickrAPI = "http://api.flickr.com/services/rest/?method=flickr.photos.searc
 let flickrKey = "b9ffbd74f90f37df094b59bd2915ff37";
 let flickrParams = "&tags='" + searchTerm + "'&format=json&nojsoncallback=1";
 
+let wordKey = "1efdcf3985947128f17dd03002a9f10e";
 
+//image search
+/*
 $("#searchButton").on("click", function() {
-  $('#images').empty();
+  $('#results').empty();
   let searchTerm = $("#searchBar").val();
   var flickrUrl = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?&tags='" + searchTerm + "'";
   $.getJSON( flickrUrl, { format: "json" } )
@@ -20,25 +23,26 @@ $("#searchButton").on("click", function() {
       $.each( data.items, function( i, item ) {
         //let searchTerm = null;
         $( "<img>" ).attr( "src", item.media.m).appendTo( "#results" );
-        if ( i === 4 ) {
+        if ( i > 3 ) {
           return false;
         }
       });
     });
-})();
+})();*/
 
+
+//word search
 $("#searchButton").on("click", function() {
-  $('#images').empty();
+  $('#related').empty();
   let searchTerm = $("#searchBar").val();
-  var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?&tags='" + searchTerm + "'";
-  $.getJSON( flickerAPI, {
-    tagmode: "any",
+  var wordURL = "http://words.bighugelabs.com/api/2/1efdcf3985947128f17dd03002a9f10e/word/json";
+  $.getJSON( wordURL, {
     format: "json"
   })
     .done(function( data ) {
       $.each( data.items, function( i, item ) {
         //let searchTerm = null;
-        $( "<a href>" ).attr( "src", item.media.m).appendTo( "#images" );
+        $( "<p>" + item.media.m + "</p>").appendTo( "#related" );
         if ( i === 4 ) {
           return false;
         }
