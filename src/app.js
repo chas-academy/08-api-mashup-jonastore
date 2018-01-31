@@ -14,7 +14,7 @@ let wordKey = "1efdcf3985947128f17dd03002a9f10e";
 
 //image search
 
-function flickr(data) { //add words funtion here?
+function flickr() { //add words funtion here?
   $('#results').empty();
   let searchTerm = $("#searchBar").val();
   var flickrUrl = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?&tags='" + searchTerm + "'";
@@ -22,7 +22,8 @@ function flickr(data) { //add words funtion here?
     .done(function( data ) {
       $.each( data.items, function( i, item ) {
         //let searchTerm = null;
-        $( "<img>" ).attr( "src", item.media.m).appendTo( "#results" );
+        //$( "<img>" ).attr( "src", item.media.m).appendTo( "#results" );
+        $("#results").append(String("<a href='" + item.link + "'><img src='" + item.media.m + "'></a>"));
         if ( i > 4 ) {
           return false;
         }
@@ -76,7 +77,7 @@ function flickrRelated(searchTerm) {
     $.getJSON( flickrUrl, { format: "json" } )
     .done(function( data ) {
       $.each( data.items, function( i, item ) {
-        $( "<img>" ).attr( "src", item.media.m).appendTo( "#results" );
+        $("#results").append(String("<a href='" + item.link + "'><img src='" + item.media.m + "'></a>"));
         if ( i === 4 ) {
           return false;
         }
