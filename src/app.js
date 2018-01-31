@@ -5,7 +5,7 @@ import './styles/app.scss';
 flickrAPI = "http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=";
 searchTerm = $("#searchBar").val();
 flickrKey = "b9ffbd74f90f37df094b59bd2915ff37";
-flickrParams = "&tags=" + searchTerm + "&per_page=30&format=json";
+flickrParams = "&tags=" + searchTerm + "&per_page=10&format=json";
 
 
 
