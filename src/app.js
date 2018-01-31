@@ -14,6 +14,22 @@ let flickrParams = "&tags='" + searchTerm + "'&format=json&nojsoncallback=1";
 $("#searchButton").on("click", function() {
   $('#images').empty();
   let searchTerm = $("#searchBar").val();
+  var flickrUrl = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?&tags='" + searchTerm + "'";
+  $.getJSON( flickrUrl, { format: "json" } )
+    .done(function( data ) {
+      $.each( data.items, function( i, item ) {
+        //let searchTerm = null;
+        $( "<img>" ).attr( "src", item.media.m).appendTo( "#images" );
+        if ( i === 4 ) {
+          return false;
+        }
+      });
+    });
+})();
+
+$("#searchButton").on("click", function() {
+  $('#images').empty();
+  let searchTerm = $("#searchBar").val();
   var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?&tags='" + searchTerm + "'";
   $.getJSON( flickerAPI, {
     tagmode: "any",
@@ -22,8 +38,8 @@ $("#searchButton").on("click", function() {
     .done(function( data ) {
       $.each( data.items, function( i, item ) {
         //let searchTerm = null;
-        $( "<img>" ).attr( "src", item.media.m).appendTo( "#images" );
-        if ( i === 3 ) {
+        $( "<a href>" ).attr( "src", item.media.m).appendTo( "#images" );
+        if ( i === 4 ) {
           return false;
         }
       });
