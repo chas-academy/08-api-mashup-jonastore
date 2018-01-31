@@ -40,7 +40,8 @@ function words() {
     .done(function( data ) {
       $.each( data, function( i, word ) {
         $.each(word, function(y, words){
-          $("#related").append(String(words).replace(/,/g,"<br>") + "<br>");
+          //$("#related").append(String(words).replace(/,/g,"<br>") + "<br>");
+          $('#related').append("<a id='link' href=" + searchTerm + "'>&nbsp;</a>");
           if ( y === 3 ) {
             return false;
           }
