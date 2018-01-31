@@ -1,13 +1,33 @@
 /* Code goes here */
-import './styles/app.scss';
+//import './styles/app.scss';
+
+//https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=b9ffbd74f90f37df094b59bd2915ff37&tags=car&format=json&nojsoncallback=1
+
+let searchTerm = $("#searchBar").val();
 
 
-flickrAPI = "http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=";
-searchTerm = $("#searchBar").val();
-flickrKey = "b9ffbd74f90f37df094b59bd2915ff37";
-flickrParams = "&tags=" + searchTerm + "&per_page=10&format=json";
+let flickrAPI = "http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=";
+let flickrKey = "b9ffbd74f90f37df094b59bd2915ff37";
+let flickrParams = "&tags='" + searchTerm + "'&format=json&nojsoncallback=1";
 
 
+$("#searchButton").on("click", function() {
+  let searchTerm = $("#searchBar").val();
+  var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?&tags='" + searchTerm + "'";
+  $.getJSON( flickerAPI, {
+    tagmode: "any",
+    format: "json"
+  })
+    .done(function( data ) {
+      $.each( data.items, function( i, item ) {
+        let searchTerm = null;
+        $( "<img>" ).attr( "src", item.media.m).appendTo( "#images" );
+        if ( i === 3 ) {
+          return false;
+        }
+      });
+    });
+})();
 
 
 
