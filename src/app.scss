@@ -8,13 +8,42 @@ h3, div {
 }
 
 button {
-	border-radius: 50px;
 	margin: 1px;
 	background-color: lightblue;
-	padding: 5px;
+	padding: 20px;
 }
 
 img {
 	border: 3px solid black;
 }
+
+#searchBar {
+	width: 80%;
+	height: 50px;
+	border-radius: 50px;
+	text-align: center;
+	font-size: 40px;
+}
+
+#searchButton {
+	border-top-left-radius: 50px;
+	border-bottom-left-radius: 50px;
+}
+
+#clearSearch {
+	border-top-right-radius: 50px;
+	border-bottom-right-radius: 50px;
+	background-color: red;
+}
+
+.relatedWord:first-child {
+	border-top-left-radius: 50px;
+	border-bottom-left-radius: 50px;
+}
+
+.relatedWord:last-child {
+	border-top-right-radius: 50px;
+	border-bottom-right-radius: 50px;
+}
+
 
