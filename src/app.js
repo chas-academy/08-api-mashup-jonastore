@@ -10,13 +10,10 @@ let wordKey = "1efdcf3985947128f17dd03002a9f10e";
 
 function flickr(searchTerm) { //add words funtion here?
   $('#results').empty();
-  //let searchTerm = $("#searchBar").val();
   var flickrUrl = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?&tags='" + searchTerm + "'";
   $.getJSON( flickrUrl, { format: "json" } )
     .done(function( data ) {
       $.each( data.items, function( i, item ) {
-        //let searchTerm = null;
-        //$( "<img>" ).attr( "src", item.media.m).appendTo( "#results" );
         $("#results").append(String("<a href='" + item.link + "'><img src='" + item.media.m + "'></a>"));
         if ( i > 3 ) {
           return false;
@@ -27,7 +24,6 @@ function flickr(searchTerm) { //add words funtion here?
 
 function words(searchTerm) {
   $('#related').empty();
-  //let searchTerm = $("#searchBar").val();
   var flickrUrl = "http://words.bighugelabs.com/api/2/1efdcf3985947128f17dd03002a9f10e/" + searchTerm + "/json";
   $.getJSON( flickrUrl, { format: "json" } )
     .done(function( data ) {
@@ -38,35 +34,7 @@ function words(searchTerm) {
       });
     });
 };
-/*
-function flickrRelated(searchTerm) {
-  console.log("testing");
-  $('#results').empty();
-  var flickrUrl = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?&tags='" + searchTerm + "'";
-    $.getJSON( flickrUrl, { format: "json" } )
-    .done(function( data ) {
-      $.each( data.items, function( i, item ) {
-        $("#results").append(String("<a href='" + item.link + "'><img src='" + item.media.m + "'></a>"));
-        if ( i > 3 ) {
-          return false;
-        }
-      });
-    });
-};
 
-function wordsRelated(searchTerm) {
-  $('#related').empty();
-  var flickrUrl = "http://words.bighugelabs.com/api/2/1efdcf3985947128f17dd03002a9f10e/" + searchTerm + "/json";
-  $.getJSON( flickrUrl, { format: "json" } )
-    .done(function( data ) {
-      $.each( data, function( i, word ) {
-        $.each(word, function(y, words){
-          $("#related").append(String("<button class='singleWord' value='" + words[0] + "'>" + words[0] + "</button>").replace("," ," "));
-          $("#searchBar").val(searchTerm);
-        });
-      });
-    });
-};*/
 
 $("body").on("click", ".singleWord", function() {
   let searchTerm = this.value;
