@@ -44,7 +44,7 @@ function flickr(searchTerm) {
 function flickr(searchTerm) {
   $('#results').empty();
   var flickrUrl = "http://api.flickr.com/services/feeds/photos_public.gne?&safe_search=&jsoncallback=?&tags='" + searchTerm + "'";
-  $.getJSON( flickrUrl, { format: "json", async: true } ).done(function( data ) {
+  $.getJSON( flickrUrl, { format: "json", async: true } ).then(function( data ) {
       $.each( data.items, function( i, image ) {
         $("#results").append(String("<a href='" + image.link + "'><img src='" + image.media.m + "'></a>"));
         //if ( i > 3 ) {
@@ -59,7 +59,7 @@ function flickr(searchTerm) {
 function words(searchTerm) {
   $('#related').empty();
   var flickrUrl = "http://words.bighugelabs.com/api/2/1efdcf3985947128f17dd03002a9f10e/" + searchTerm + "/json";
-  $.getJSON( flickrUrl, { format: "json", async: true } ).done(function( data ) {
+  $.getJSON( flickrUrl, { format: "json", async: true } ).then(function( data ) {
       $.each( data, function( i, word ) {
         $.each(word, function(i, word){
           $("#related").append(String("<button class='relatedWord' value=" + word[0] + ">" + word[0] + "</button>").replace(",", " "));
