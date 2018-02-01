@@ -11,7 +11,7 @@ let wordKey = "1efdcf3985947128f17dd03002a9f10e";
 //flickr api search
 function flickr(searchTerm) {
   $('#results').empty();
-  var flickrUrl = "http://api.flickr.com/services/feeds/photos_public.gne?&safe_search=&jsoncallback=?&tags='" + searchTerm + "'";
+  var flickrUrl = "http://api.flickr.com/services/feeds/photos_public.gne?&safe_search=3&safe_search=&jsoncallback=?&tags='" + searchTerm + "'";
   $.getJSON( flickrUrl, { format: "json", async: true } ).then(function( data ) {
       $.each( data.items, function( i, image ) {
         $("#results").append(String("<a href='" + image.link + "'><img src='" + image.media.m + "'></a>"));
