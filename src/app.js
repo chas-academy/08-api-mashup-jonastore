@@ -1,13 +1,5 @@
 import './app.scss';
 
-/*
-let searchTerm = $("#searchBar").val();
-let flickrAPI = "http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=";
-let flickrKey = "b9ffbd74f90f37df094b59bd2915ff37";
-let flickrParams = "&tags='" + searchTerm + "'&format=json&nojsoncallback=1";
-let wordKey = "1efdcf3985947128f17dd03002a9f10e";
-*/
-
 //flickr api search
 function flickr(searchTerm) {
   $('#results').empty();
